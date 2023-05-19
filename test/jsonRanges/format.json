@@ -1,0 +1,20 @@
+{
+    "services" : [
+        {
+            "name" : "service1",
+            "location": "us-east-1",
+            "CidrRanges" : [
+                "1.1.1.1/32",
+                "1.2.3.0/24"
+            ]
+        },
+        {
+            "name" : "service2",
+            "location": "us-east-2",
+            "CidrRanges" : [
+                "10.0.0.0/8",
+                "192.168.0.0/24"
+             ]
+        }
+    ]
+}
