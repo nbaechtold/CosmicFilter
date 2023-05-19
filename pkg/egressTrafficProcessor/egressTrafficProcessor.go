@@ -82,6 +82,7 @@ func (esp *EgressTrafficProcessor) ProcessCSV(reader io.Reader, writer io.Writer
 		go func() {
 			if len(record) <= ipIndex {
 				ch <- record
+				return
 			}
 
 			association, err := esp.processEgressRecord(record[ipIndex])
@@ -89,6 +90,7 @@ func (esp *EgressTrafficProcessor) ProcessCSV(reader io.Reader, writer io.Writer
 			if err != nil {
 				record = append(record, err.Error())
 				ch <- record
+				return
 			}
 
 			record = append(record, association.Primary.Service)
