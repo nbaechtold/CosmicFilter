@@ -8,25 +8,22 @@ import (
 
 func TestGetEgressTrafficProcessor(t *testing.T) {
 	jsonFile, err := os.Open("../../test/jsonRanges/format.json")
-	defer jsonFile.Close()
-
 	if err != nil {
 		t.Fatalf("failed to open file: %v", err)
 	}
+	defer jsonFile.Close()
 
 	csvOutput, err := os.Create("../../test/csv/output.csv")
-	defer csvOutput.Close()
-
 	if err != nil {
 		t.Fatalf("failed to create csv output file: %v", err)
 	}
+	defer csvOutput.Close()
 
 	csvInput, err := os.Open("../../test/csv/data copy.csv")
-	defer csvInput.Close()
-
 	if err != nil {
 		t.Fatalf("failed to open csv input file: %v", err)
 	}
+	defer csvInput.Close()
 
 	egressProcessor, err := GetEgressTrafficProcessor([]io.Reader{jsonFile})
 	if err != nil {
