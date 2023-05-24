@@ -19,7 +19,7 @@ func TestGetEgressTrafficProcessor(t *testing.T) {
 	}
 	defer csvOutput.Close()
 
-	csvInput, err := os.Open("../../test/csv/data copy.csv")
+	csvInput, err := os.Open("../../test/csv/data.csv")
 	if err != nil {
 		t.Fatalf("failed to open csv input file: %v", err)
 	}

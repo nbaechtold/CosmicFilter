@@ -54,6 +54,20 @@ func GetEgressTrafficProcessor(jsonDocuments []io.Reader) (*EgressTrafficProcess
 	}
 	egressProcessor.Associators = append(egressProcessor.Associators, gcpAssociator)
 
+	// Add Google associator
+	googleAssociator, err := ipanalyzer.NewGoogleAssociator()
+	if err != nil {
+		return nil, err
+	}
+	egressProcessor.Associators = append(egressProcessor.Associators, googleAssociator)
+
+	// Add AWS Assocaitor
+	awsAssociator, err := ipanalyzer.NewAWSAssociator()
+	if err != nil {
+		return nil, err
+	}
+	egressProcessor.Associators = append(egressProcessor.Associators, awsAssociator)
+
 	// Add DNS associator
 	egressProcessor.Associators = append(egressProcessor.Associators, ipanalyzer.NewDNSAssociator())
 

@@ -7,13 +7,13 @@ import (
 	"net/http"
 )
 
-type CloudIPRanges struct {
-	SyncToken  string   `json:"syncToken"`
-	CreateDate string   `json:"createDate"`
-	Prefixes   []Prefix `json:"prefixes"`
+type GcpCloudIPRanges struct {
+	SyncToken  string      `json:"syncToken"`
+	CreateDate string      `json:"createDate"`
+	Prefixes   []GcpPrefix `json:"prefixes"`
 }
 
-type Prefix struct {
+type GcpPrefix struct {
 	IPv4Prefix string `json:"ipv4Prefix"`
 	IPv6Prefix string `json:"ipv6Prefix"`
 	Service    string `json:"service"`
@@ -23,7 +23,7 @@ type Prefix struct {
 type Prefixes struct {
 }
 
-func retrieveGCPRanges() (*CloudIPRanges, error) {
+func retrieveGCPRanges() (*GcpCloudIPRanges, error) {
 	resp, err := http.Get("https://www.gstatic.com/ipranges/cloud.json")
 	if err != nil {
 		fmt.Println("Error making HTTP request:", err)
@@ -31,7 +31,7 @@ func retrieveGCPRanges() (*CloudIPRanges, error) {
 	}
 	defer resp.Body.Close()
 
-	var cloudIPRanges CloudIPRanges
+	var cloudIPRanges GcpCloudIPRanges
 	err = json.NewDecoder(resp.Body).Decode(&cloudIPRanges)
 	if err != nil {
 		fmt.Println("Error decoding JSON response:", err)
